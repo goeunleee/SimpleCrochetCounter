@@ -46,51 +46,57 @@ class _AppState extends State<App> {
             ),
             backgroundColor: Colors.green.shade100,
           ),
-          body: Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const Text(
-                  "Click Count",
-                  style: TextStyle(
-                    fontSize: 20,
-                  ),
-                ),
-                Text(
-                  "$counter",
-                  style: const TextStyle(
-                    fontSize: 30,
-                  ),
-                ),
-                Row(
+          body: SingleChildScrollView(
+            child: Padding(
+              padding: const EdgeInsets.all(10),
+              child: Center(
+                child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
+                    const Text(
+                      "Click Count",
+                      style: TextStyle(
+                        fontSize: 20,
+                      ),
+                    ),
+                    Text(
+                      "$counter",
+                      style: const TextStyle(
+                        fontSize: 30,
+                      ),
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        IconButton(
+                          onPressed: increase,
+                          icon: const Icon(Icons.cruelty_free_outlined),
+                          iconSize: 45,
+                        ),
+                        const SizedBox(
+                          width: 20,
+                        ),
+                        IconButton(
+                          onPressed: decrease,
+                          icon: const Icon(Icons.cruelty_free_sharp),
+                          iconSize: 45,
+                        ),
+                      ],
+                    ),
+                    // for (var n in numbers) Text('$n'),
                     IconButton(
-                      onPressed: increase,
-                      icon: const Icon(Icons.cruelty_free_outlined),
+                      onPressed: refresh,
                       iconSize: 45,
+                      icon: const Icon(Icons.replay_circle_filled_rounded),
                     ),
                     const SizedBox(
-                      width: 20,
+                      height: 70,
                     ),
-                    IconButton(
-                      onPressed: decrease,
-                      icon: const Icon(Icons.cruelty_free_sharp),
-                      iconSize: 45,
-                    ),
+                    Image.asset('assets/images/sign.png',
+                        width: 800, height: 550),
                   ],
                 ),
-                // for (var n in numbers) Text('$n'),
-                IconButton(
-                  onPressed: refresh,
-                  iconSize: 45,
-                  icon: const Icon(Icons.replay_circle_filled_rounded),
-                ),
-                const SizedBox(
-                  height: 70,
-                ),
-                Image.asset('assets/images/sign.png', width: 800, height: 500),
-              ],
+              ),
             ),
           )),
     );
