@@ -13,11 +13,10 @@ class App extends StatefulWidget {
 
 class _AppState extends State<App> {
   int counter = 0;
-  // List<int> numbers = [];
+
   void increase() {
     setState(() {
       counter += 1;
-      // numbers.add(numbers.length + 1);
     });
   }
 
@@ -32,7 +31,6 @@ class _AppState extends State<App> {
   void refresh() {
     setState(() {});
     counter = 0;
-    // numbers = [];
   }
 
   @override
