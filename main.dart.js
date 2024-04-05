@@ -36077,7 +36077,7 @@ var s=this.d
 s===$&&A.b()
 s.mY("Int","cnt",0)},
 S(a){var s=this,r=null,q=A.aaQ(""+s.f,B.IY),p=t.U,o=A.aam(A.a([A.Qm(r,B.zq,45,s.ga0a(),r,r),B.Gt,A.Qm(r,B.zp,45,s.gYY(),r,r)],p),B.bH,B.dR,B.bN),n=A.Qm(r,B.zr,45,s.ga1Y(),r,r)
-return new A.rd(new A.tq(new A.pb(B.KN,B.y0,!0,new A.HE(r,r,1/0,56),r),new A.D5(A.M6(A.agE(A.a([B.uO,B.KM,q,o,n,B.Gu,B.E4,new A.qF(A.ajS(r,r,new A.pg("assets/images/sign.png",r,r)),800,550,r)],p),B.dR),r,r),r),B.y6,r),r)}}
+return new A.rd(new A.tq(new A.pb(B.KM,B.y0,!0,new A.HE(r,r,1/0,56),r),new A.D5(A.M6(A.agE(A.a([B.uO,B.KN,q,o,n,B.Gu,B.E4,new A.qF(A.ajS(r,r,new A.pg("assets/images/sign.png",r,r)),800,550,r)],p),B.dR),r,r),r),B.y6,r),r)}}
 A.Z1.prototype={
 $0(){},
 $S:0}
@@ -64937,8 +64937,8 @@ B.K4=new A.n(!0,B.i,null,"Roboto",null,null,null,null,null,null,null,null,null,n
 B.JX=new A.n(!0,B.i,null,"Roboto",null,null,null,null,null,null,null,null,null,null,null,null,null,B.e,null,null,null,"whiteMountainView labelMedium",null,null,null,null)
 B.JB=new A.n(!0,B.i,null,"Roboto",null,null,null,null,null,null,null,null,null,null,null,null,null,B.e,null,null,null,"whiteMountainView labelSmall",null,null,null,null)
 B.KL=new A.cv(B.Jk,B.Ku,B.Kf,B.Ia,B.K7,B.Ji,B.Kw,B.Iy,B.J1,B.K0,B.I2,B.Kg,B.K4,B.JX,B.JB)
-B.KM=new A.lw("Click Count",null,B.uY,null,null)
-B.KN=new A.lw("\uba87 \ub2e8 \uae4c\uc9c0 \ub5b4\ub354\ub77c?",null,null,null,null)
+B.KM=new A.lw("simple crochet counter",null,null,null,null)
+B.KN=new A.lw("Click Count",null,B.uY,null,null)
 B.Ne=new A.Y6(0,"system")
 B.KO=new A.uk(null)
 B.ex=new A.DC(0,"clamp")
