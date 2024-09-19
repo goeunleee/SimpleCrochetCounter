@@ -107,7 +107,9 @@ class _AppState extends State<App> with SingleTickerProviderStateMixin {
 
   void saveTitle() async {
     setState(() {
-      title = _textController.text.isEmpty ? "제목없음" : _textController.text;
+      title = _textController.text.isEmpty
+          ? "untitled project "
+          : _textController.text;
       isEditingTitle = false;
     });
     await prefs.setString("title", title);
@@ -178,7 +180,7 @@ class _AppState extends State<App> with SingleTickerProviderStateMixin {
     prefs.setInt("cnt", 0);
   }
 
-  // 슬롯 텍스트 편집 UI
+  // 슬롯편집 UI
   Widget buildSlotEditor(int index) {
     return isEditingSlot[index]
         ? Padding(
@@ -187,22 +189,20 @@ class _AppState extends State<App> with SingleTickerProviderStateMixin {
               children: [
                 Expanded(
                   child: TextField(
-                    controller: slotControllers[index], // 각 슬롯의 컨트롤러 사용
+                    controller: slotControllers[index],
                     autofocus: true,
                     onChanged: (newText) {
                       setState(() {
-                        slotTexts[index] = newText; // 텍스트 변경 반영
+                        slotTexts[index] = newText;
                       });
                     },
                   ),
                 ),
-                // 저장 버튼 추가
                 IconButton(
-                  icon: const Icon(Icons.save), // 저장 아이콘
+                  icon: const Icon(Icons.save),
                   onPressed: () {
                     setState(() {
-                      isEditingSlot[index] = false; // 편집 모드 종료
-                      // 변경된 텍스트를 저장
+                      isEditingSlot[index] = false;
                     });
                   },
                 ),
@@ -212,7 +212,7 @@ class _AppState extends State<App> with SingleTickerProviderStateMixin {
         : GestureDetector(
             onTap: () {
               setState(() {
-                isEditingSlot[index] = true; // 슬롯 편집 모드 활성화
+                isEditingSlot[index] = true;
               });
             },
             child: Padding(
@@ -355,10 +355,8 @@ class _AppState extends State<App> with SingleTickerProviderStateMixin {
                   ),
                 ),
 
-                // 이미지 표시
                 Image.asset('assets/images/sign.png', width: 800, height: 550),
 
-                // 룰렛 표시 및 슬롯 텍스트 편집 가능
                 Stack(
                   alignment: Alignment.center,
                   children: [
@@ -381,7 +379,6 @@ class _AppState extends State<App> with SingleTickerProviderStateMixin {
                         ),
                       ),
                     ),
-                    // click 버튼을 중앙에 배치
                     FloatingActionButton(
                       onPressed: () => _controller.rollTo(
                         3,
@@ -400,7 +397,7 @@ class _AppState extends State<App> with SingleTickerProviderStateMixin {
                     return GestureDetector(
                       onTap: () {
                         setState(() {
-                          isEditingSlot[index] = true; // 슬롯 편집 모드 활성화
+                          isEditingSlot[index] = true;
                         });
                       },
                       child: isEditingSlot[index]
@@ -412,8 +409,8 @@ class _AppState extends State<App> with SingleTickerProviderStateMixin {
                                 setState(() {
                                   slotTexts[index] = newText.isEmpty
                                       ? "Item ${index + 1}"
-                                      : newText; // 빈 값일 때 기본 텍스트로 설정
-                                  isEditingSlot[index] = false; // 편집 모드 종료
+                                      : newText;
+                                  isEditingSlot[index] = false;
                                 });
                               },
                             )
@@ -424,8 +421,6 @@ class _AppState extends State<App> with SingleTickerProviderStateMixin {
                     );
                   }),
                 ),
-
-                // 룰렛 돌리는 버튼
               ],
             ),
           ),
