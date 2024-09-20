@@ -1,4 +1,6 @@
 // project_manager.dart
+// ignore_for_file: avoid_print
+
 import '../models/project.dart';
 
 class ProjectManager {

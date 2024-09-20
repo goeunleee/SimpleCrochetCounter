@@ -1,4 +1,3 @@
-// main.dart
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:math';
@@ -33,6 +32,7 @@ class _AppState extends State<App> with SingleTickerProviderStateMixin {
   int selectedProjectIndex = -1;
   bool isEditingListTitle = false;
   final TextEditingController _editTextController = TextEditingController();
+  int? editingIndex; // 편집 중인 인덱스 관리
 
   @override
   void initState() {
@@ -200,12 +200,19 @@ class _AppState extends State<App> with SingleTickerProviderStateMixin {
                 ProjectList(
                   projects: manager.octopus,
                   onSelectProject: selectProject,
-                  onEditProject: (index) {
+                  onStartEditingProject: (index) {
+                    // 수정 버튼을 눌렀을 때 수정 모드로 전환
                     setState(() {
-                      selectedProjectIndex = index;
-                      isEditingListTitle = true;
-                      _editTextController.text = manager.octopus[index].title;
+                      editingIndex = index; // 수정 중인 인덱스 설정
                     });
+                  },
+                  onSaveEditProject: (index, newTitle) {
+                    // 저장 버튼을 눌렀을 때
+                    setState(() {
+                      manager.octopus[index].title = newTitle; // 새로운 제목 저장
+                      editingIndex = null; // 수정 모드 종료
+                    });
+                    saveProjectsToCache(); // 캐시에 저장
                   },
                   onDeleteProject: deleteProject,
                   onAddProject: () {
@@ -221,6 +228,8 @@ class _AppState extends State<App> with SingleTickerProviderStateMixin {
                       });
                     }
                   },
+                  editingIndex: editingIndex, // 편집 중인 인덱스 전달
+                  editTextController: _editTextController, // 컨트롤러 전달
                 ),
                 const SizedBox(height: 20),
                 const Padding(
@@ -230,20 +239,25 @@ class _AppState extends State<App> with SingleTickerProviderStateMixin {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Button(name: "slip/ss"),
+                          Button(
+                            name: "slip/ss",
+                            koreanName: "빼뜨기",
+                          ),
                           SizedBox(width: 10),
-                          Button(name: "ch"),
+                          Button(name: "ch", koreanName: "사슬뜨기"),
                           SizedBox(width: 10),
-                          Button(name: "sc"),
+                          Button(name: "sc", koreanName: "짧은 뜨기"),
                         ],
                       ),
                       SizedBox(height: 15),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Button(name: "half-double"),
+                          Button(name: "half-double", koreanName: "긴뜨기"),
                           SizedBox(width: 10),
-                          Button(name: "double"),
+                          Button(name: "double", koreanName: "한길 긴뜨기"),
+                          SizedBox(width: 10),
+                          Button(name: "treble(tc)", koreanName: "두길 긴뜨기"),
                         ],
                       ),
                     ],
@@ -251,7 +265,7 @@ class _AppState extends State<App> with SingleTickerProviderStateMixin {
                 ),
                 const SizedBox(height: 20),
                 const Text(
-                  "또는, 그냥 운에 맡기기",
+                  "그냥 운에 맡기기",
                   style: TextStyle(fontSize: 17),
                 ),
                 const SizedBox(height: 20),
