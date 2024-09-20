@@ -26,4 +26,4 @@ jobs:
       - run: git commit -m "Automatic deployment by github-actions"
 
       # GitHub Pages에 강제 푸시
-      - run: git push origin HEAD:gh-pages --force
+      - run: git push origin HEAD:upload --force
