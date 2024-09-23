@@ -30,6 +30,6 @@ jobs:
           git config --global user.name "goeun lee"
           git config --global user.email "goeun3501@gmail.com"
           git checkout -b deploy
-          git add build/web
+          git add build/web/*
           git commit -m "Deploy to deploy"
           git push --force https://x-access-token:${{ secrets.FLUTTER }}@github.com/goeunleee/SimpleCrochetCounter.git HEAD:deploy
