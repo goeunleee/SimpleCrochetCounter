@@ -27,8 +27,8 @@ jobs:
           git config --global user.name "goeun lee"
           git config --global user.email "goeun3501@gmail.com"
           git checkout -b deploy
-          git rm -rf . # 현재 루트에서 모든 파일 제거
-          cp -r build/web/* . # build/web 파일을 루트로 복사
+          rm -rf ./*  # 기존 파일들 삭제
+          cp -r build/web/* .  # build/web 안의 모든 파일을 복사
           git add .
-          git commit -m "Deploy to deploy"
+          git commit -m "Deploy web build"
           git push --force https://x-access-token:${{ secrets.FLUTTER }}@github.com/goeunleee/SimpleCrochetCounter.git HEAD:deploy
