@@ -51,77 +51,95 @@ class ProjectList extends StatelessWidget {
               )
             : Column(
                 children: [
-                  ListView.builder(
-                    shrinkWrap: true,
-                    itemCount: projects.length,
-                    itemBuilder: (context, index) {
-                      final project = projects[index];
-                      final isEditing = editingIndex == index;
+                  const SizedBox(height: 50),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Container(
+                      decoration: BoxDecoration(
+                        border: Border.all(
+                          color: const Color.fromARGB(
+                              255, 173, 190, 162), // 원하는 색상
+                          width: 1.0, // 보더 두께
+                        ),
+                        borderRadius: BorderRadius.circular(10), // 모서리 둥글게
+                      ),
+                      child: ListView.builder(
+                        shrinkWrap: true,
+                        itemCount: projects.length,
+                        itemBuilder: (context, index) {
+                          final project = projects[index];
+                          final isEditing = editingIndex == index;
 
-                      return Slidable(
-                        endActionPane: ActionPane(
-                          motion: const ScrollMotion(),
-                          children: [
-                            SlidableAction(
-                              onPressed: (context) {
-                                editTextController.text = project.title;
-                                onStartEditingProject(index);
-                              },
-                              backgroundColor: const Color(0xFF0392CF),
-                              icon: Icons.edit,
-                              label: 'Edit',
-                            ),
-                            SlidableAction(
-                              onPressed: (context) => onDeleteProject(index),
-                              backgroundColor: const Color(0xFFFE4A49),
-                              icon: Icons.delete,
-                              label: 'Delete',
-                            ),
-                          ],
-                        ),
-                        child: ListTile(
-                          title: isEditing
-                              ? Row(
-                                  children: [
-                                    Expanded(
-                                      child: TextField(
-                                        controller: editTextController,
-                                        autofocus: true,
-                                        onSubmitted: (newTitle) {
-                                          onSaveEditProject(index, newTitle);
-                                        },
-                                      ),
-                                    ),
-                                    IconButton(
-                                      icon: const Icon(Icons.save),
-                                      onPressed: () {
-                                        onSaveEditProject(
-                                            index, editTextController.text);
-                                      },
-                                    ),
-                                  ],
-                                )
-                              : Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Padding(
-                                      padding: EdgeInsets.symmetric(
-                                        horizontal:
-                                            MediaQuery.of(context).size.width *
-                                                0.05, // 화면 너비의 5%
-                                      ),
-                                      child: Text(
-                                        project.title,
-                                      ),
-                                    ),
-                                    const Icon(Icons.keyboard_double_arrow_left)
-                                  ],
+                          return Slidable(
+                            endActionPane: ActionPane(
+                              motion: const ScrollMotion(),
+                              children: [
+                                SlidableAction(
+                                  onPressed: (context) {
+                                    editTextController.text = project.title;
+                                    onStartEditingProject(index);
+                                  },
+                                  backgroundColor: const Color(0xFF0392CF),
+                                  icon: Icons.edit,
+                                  label: 'Edit',
                                 ),
-                          onTap: () => onSelectProject(index), // 프로젝트 선택
-                        ),
-                      );
-                    },
+                                SlidableAction(
+                                  onPressed: (context) =>
+                                      onDeleteProject(index),
+                                  backgroundColor: const Color(0xFFFE4A49),
+                                  icon: Icons.delete,
+                                  label: 'Delete',
+                                ),
+                              ],
+                            ),
+                            child: ListTile(
+                              title: isEditing
+                                  ? Row(
+                                      children: [
+                                        Expanded(
+                                          child: TextField(
+                                            controller: editTextController,
+                                            autofocus: true,
+                                            onSubmitted: (newTitle) {
+                                              onSaveEditProject(
+                                                  index, newTitle);
+                                            },
+                                          ),
+                                        ),
+                                        IconButton(
+                                          icon: const Icon(Icons.save),
+                                          onPressed: () {
+                                            onSaveEditProject(
+                                                index, editTextController.text);
+                                          },
+                                        ),
+                                      ],
+                                    )
+                                  : Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Padding(
+                                          padding: EdgeInsets.symmetric(
+                                            horizontal: MediaQuery.of(context)
+                                                    .size
+                                                    .width *
+                                                0.05,
+                                          ),
+                                          child: Text(
+                                            project.title,
+                                          ),
+                                        ),
+                                        const Icon(
+                                            Icons.keyboard_double_arrow_left),
+                                      ],
+                                    ),
+                              onTap: () => onSelectProject(index),
+                            ),
+                          );
+                        },
+                      ),
+                    ),
                   ),
                   const SizedBox(height: 20),
                   if (projects.length < 5)
