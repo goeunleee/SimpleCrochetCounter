@@ -1,4 +1,7 @@
+// ignore_for_file: avoid_print
+
 import 'package:flutter/material.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import '../models/project.dart';
 
@@ -55,42 +58,68 @@ class ProjectList extends StatelessWidget {
                       final project = projects[index];
                       final isEditing = editingIndex == index;
 
-                      return ListTile(
-                        title: isEditing
-                            ? TextField(
-                                controller: editTextController,
-                                autofocus: true,
-                                onSubmitted: (newTitle) {
-                                  onSaveEditProject(
-                                      index, newTitle); // 제목 수정 후 저장
-                                },
-                              )
-                            : Text(project.title),
-                        trailing: Row(
-                          mainAxisSize: MainAxisSize.min,
+                      return Slidable(
+                        endActionPane: ActionPane(
+                          motion: const ScrollMotion(),
                           children: [
-                            isEditing
-                                ? IconButton(
-                                    icon: const Icon(Icons.save),
-                                    onPressed: () {
-                                      onSaveEditProject(
-                                          index, editTextController.text); // 저장
-                                    },
-                                  )
-                                : IconButton(
-                                    icon: const Icon(Icons.edit),
-                                    onPressed: () {
-                                      editTextController.text = project.title;
-                                      onStartEditingProject(index); // 수정 모드로 전환
-                                    },
-                                  ),
-                            IconButton(
-                              icon: const Icon(Icons.delete),
-                              onPressed: () => onDeleteProject(index),
+                            SlidableAction(
+                              onPressed: (context) {
+                                editTextController.text = project.title;
+                                onStartEditingProject(index);
+                              },
+                              backgroundColor: const Color(0xFF0392CF),
+                              icon: Icons.edit,
+                              label: 'Edit',
+                            ),
+                            SlidableAction(
+                              onPressed: (context) => onDeleteProject(index),
+                              backgroundColor: const Color(0xFFFE4A49),
+                              icon: Icons.delete,
+                              label: 'Delete',
                             ),
                           ],
                         ),
-                        onTap: () => onSelectProject(index),
+                        child: ListTile(
+                          title: isEditing
+                              ? Row(
+                                  children: [
+                                    Expanded(
+                                      child: TextField(
+                                        controller: editTextController,
+                                        autofocus: true,
+                                        onSubmitted: (newTitle) {
+                                          onSaveEditProject(index, newTitle);
+                                        },
+                                      ),
+                                    ),
+                                    IconButton(
+                                      icon: const Icon(Icons.save),
+                                      onPressed: () {
+                                        onSaveEditProject(
+                                            index, editTextController.text);
+                                      },
+                                    ),
+                                  ],
+                                )
+                              : Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Padding(
+                                      padding: EdgeInsets.symmetric(
+                                        horizontal:
+                                            MediaQuery.of(context).size.width *
+                                                0.05, // 화면 너비의 5%
+                                      ),
+                                      child: Text(
+                                        project.title,
+                                      ),
+                                    ),
+                                    const Icon(Icons.keyboard_double_arrow_left)
+                                  ],
+                                ),
+                          onTap: () => onSelectProject(index), // 프로젝트 선택
+                        ),
                       );
                     },
                   ),
