@@ -13,6 +13,7 @@ Flutter를 사용해 만든 크로셰 카운터 앱 입니다.
 - Dart: 앱의 로직 구현
 - Shared Preferences: 로컬 데이터 저장 및 관리
 - Roulette 패키지: 무작위 룰렛 기능 구현(각 룰렛 필드 편집기능 TBD)
+- Slider : 모바일에 최적화된 리스트 편집 기능을 구현.
 
 # 기능
 
