@@ -142,6 +142,7 @@ class _HomeScreenState extends State<HomeScreen>
                               cnt++;
                               manager.octopus[selectedProjectIndex].counter =
                                   cnt;
+                              saveProjectsToCache();
                             });
                           },
                           decrease: () {
@@ -150,6 +151,7 @@ class _HomeScreenState extends State<HomeScreen>
                                 cnt--;
                                 manager.octopus[selectedProjectIndex].counter =
                                     cnt;
+                                saveProjectsToCache();
                               });
                             }
                           },
@@ -157,6 +159,7 @@ class _HomeScreenState extends State<HomeScreen>
                             setState(() {
                               cnt = 0;
                               manager.octopus[selectedProjectIndex].counter = 0;
+                              saveProjectsToCache();
                             });
                           },
                         ),
